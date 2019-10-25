@@ -91,6 +91,15 @@ export class PostsFormComponent implements OnInit {
     this.state$ = this.store.select( store => store );
     this.posts$ = this.store.select( store => store.posts );
 
+    //re call get posts.. because
+    //right now we are still update AppState.list with the API response
+    //so we must call this again..
+
+    //or we can call a side effect .. for the action.. GetPostAction
+
+    this.store.dispatch(new GetPostsAction({pageLimit: 600, pageStart: 1, pageNumber: 1, searchKeyword: 'bbbbb'}));
+    this.state$ = this.store.select( store => store );
+    this.posts$ = this.store.select( store => store.posts );
 
 }
 

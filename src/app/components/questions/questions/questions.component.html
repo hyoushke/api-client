@@ -1,0 +1,40 @@
+
+
+    {{ (questionsRx$ | async) | json }}
+
+<div *ngFor="let q of (questionsResponse$ | async).results ">
+    {{ q.email }}
+</div>
+
+<div class="container-fluid">
+
+  <div class="card">
+    <div class="card-header">
+      Questions
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Get Questions</h5>
+      <p class="card-text">
+        {{ (questionsResponse$ | async) | json }}
+      </p>
+      <button class="btn btn-primary" (click)="onClickBtnGetQuestions()">Get Questions</button>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      Answers
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Generated Answers</h5>
+      <p class="card-text">
+        {{ (questionsResponse$ | async) | json }}
+      </p>
+      <button class="btn btn-primary" (click)="onClickBtnGetQuestions()">Post Answers</button>
+    </div>
+  </div>
+
+
+
+</div>

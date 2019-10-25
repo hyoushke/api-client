@@ -1,0 +1,114 @@
+
+
+
+
+
+    <div class="container-fluid">
+
+      <div class="card">
+        <div class="card-header">
+          Posts
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Posts</h5>
+          <p class="card-text">
+
+          </p>
+
+
+
+          <form class="form-inline float-left">
+              <div class="form-group mb-2">
+
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-secondary active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+                      </label>
+                    </div>
+
+              </div>
+            </form>
+
+
+            <form class="form-inline float-right">
+                <div class="form-group mb-2">
+
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active">
+                          <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                        </label>
+                        <label class="btn btn-secondary">
+                          <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+                        </label>
+                        <label class="btn btn-secondary">
+                          <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+                        </label>
+                      </div>
+
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                  <label for="inputPassword2" class="sr-only">Search</label>
+                  <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Search</button>
+              </form>
+
+
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Status</th>
+                <th scope="col">Image</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let post of (docs$ | async) ">
+              <tr>
+                <th scope="row">{{ post.id }}</th>
+                <td>{{ post.title }}</td>
+                <td>{{ post.author }}</td>
+                <td> <a href="#" class="badge badge-success">{{ post.status }}</a> </td>
+                <td> <img class="rounded" [src]="post.imageurl" style="height: 120px;"> </td>
+                <td><button class="btn btn-primary" (click)="onClickBtnGetPosts()">Edit</button></td>
+                <td><button class="btn btn-primary" (click)="onClickBtnGetPosts()">Delete</button></td>
+                <td><button class="btn btn-primary" (click)="onClickBtnGetPosts()">Details</button></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+          <button class="btn btn-primary" (click)="onClickBtnGetPosts()">Get Posts</button>
+        </div>
+      </div>
+
+
+    </div>

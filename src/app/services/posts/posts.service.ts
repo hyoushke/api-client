@@ -37,12 +37,12 @@ export class PostsService {
   }
   */
 
-  getPosts(pageLimit: number, pageStart: number, pageNumber: number, searchKeyword: string): Observable<any> {
+  getPosts(pageLimit: number, pageNumber: number, searchField: string, searchKeyword: string): Observable<any> {
 
     console.log('start service');
 
 
-    const url = this.url + '/posts/' + pageLimit + '/' + pageStart + '/' + pageNumber + '/' + searchKeyword;
+    const url = this.url + '/posts/' + pageLimit + '/' + pageNumber + '/' + searchField + '/' + searchKeyword;
     console.log(url);
     return this.http.get<any>(url, this.options);
   }

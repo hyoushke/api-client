@@ -13,45 +13,40 @@
           <h5 class="card-title">Posts</h5>
           <p class="card-text">
 
+            Current Page : {{ (pagination$ | async).pageNumber }} <br />
+            Page Size : {{ (pagination$ | async).pageSize }} <br />
+            Total Pages : {{ (pagination$ | async).pageTotal }} <br />
+            Rows : {{ (pagination$ | async).totalRows }}<br />
+
+            <br />
+            <br />
+            Page Size : Selected {{ pageSize }}
+
+
           </p>
 
 
 
           <form class="form-inline float-left">
-              <div class="form-group mb-2">
-
-                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label class="btn btn-secondary active">
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
-                      </label>
-                      <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio
-                      </label>
-                      <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio
-                      </label>
-                    </div>
-
-              </div>
-            </form>
+              <button type="submit" class="btn btn-success mb-2">Create</button>
+              <button class="btn btn-primary" (click)="onClickBtnGetPosts(0)">Refresh</button>
+          </form>
 
 
             <form class="form-inline float-right">
                 <div class="form-group mb-2">
-
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary active">
-                          <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
-                        </label>
-                        <label class="btn btn-secondary">
-                          <input type="radio" name="options" id="option2" autocomplete="off"> Radio
-                        </label>
-                        <label class="btn btn-secondary">
-                          <input type="radio" name="options" id="option3" autocomplete="off"> Radio
-                        </label>
-                      </div>
-
+                    <label for="inputState">Result</label>
+                    <select (change)="onChange($event)"  class="form-control">
+                      <option>5</option>
+                      <option>10</option>
+                      <option>15</option>
+                      <option>20</option>
+                    </select>
                 </div>
+
+
+
+
                 <div class="form-group mx-sm-3 mb-2">
                   <label for="inputPassword2" class="sr-only">Search</label>
                   <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
@@ -91,22 +86,28 @@
 
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
+
+
+    <ng-container *ngFor="let p of [].constructor( (pageTotal$ | async) ); let i = index; let f = first; let l = last;">
+
+    <li *ngIf="f == true" class="page-item disabled">
+      <button class="page-link" href="#" tabindex="-1">Previous</button>
     </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
+
+    <li class="page-item"><button class="page-link" (click)="onClickBtnPagination(i)">{{ (i + 1) }}</button></li>
+
+    <li *ngIf="l == true" class="page-item">
+      <button class="page-link">Next</button>
     </li>
+  </ng-container>
+
   </ul>
 </nav>
 
 
 
 
-          <button class="btn btn-primary" (click)="onClickBtnGetPosts()">Get Posts</button>
+
         </div>
       </div>
 

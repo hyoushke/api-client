@@ -21,6 +21,8 @@ import { PostsContainerComponent } from './components/posts/posts-container/post
 import { HeaderComponent } from './components/layouts/header/header/header.component';
 import { FooterComponent } from './components/layouts/footer/footer/footer.component';
 import { NotificationsComponent } from './components/layouts/notifications/notifications/notifications.component';
+import { usersReducer } from './state/reducers/users.reducer';
+import { navigationsReducer } from './state/reducers/navigations.reducer';
 
 @NgModule({
   declarations: [
@@ -41,8 +43,9 @@ import { NotificationsComponent } from './components/layouts/notifications/notif
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
-      questions: questionReducer,
-      posts: postsReducer
+      navigations: navigationsReducer,
+      posts: postsReducer,
+      users: usersReducer
     }),
     EffectsModule.forRoot([QuestionsEffects, PostsEffects]),
   ],

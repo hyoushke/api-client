@@ -20,6 +20,17 @@ export class PostsComponent implements OnInit {
     public state$: Observable<any>;
     public docs$: Observable<any>;
 
+
+    public totalRows$: Observable<any>;
+    public pageSize$: Observable<any>;
+    public pageTotal$: Observable<any>;
+    public pageNumber$: Observable<any>;
+
+    public pagination$: Observable<any>;
+    public pages: any;
+
+    public pageSize = 10;
+
     constructor(private store: Store<AppState>) {
 
     }
@@ -30,11 +41,32 @@ export class PostsComponent implements OnInit {
       this.posts$ = this.store.select( store => store.posts );
     }
 
-    onClickBtnGetPosts(): void {
+    onChange(event) {
+      //alert(event.target.value);
+      this.pageSize = event.target.value;
+      this.onClickBtnGetPosts(0);
+    }
 
-      this.store.dispatch(new GetPostsAction({pageLimit: 600, pageStart: 1, pageNumber: 1, searchKeyword: 'bbbbb'}));
+    onClickBtnGetPosts(pageNumber: number): void {
+      pageNumber = pageNumber + 1;
+
+      this.store.dispatch(new GetPostsAction({pageLimit: this.pageSize, pageNumber: pageNumber, searchField: '1', searchKeyword: '1'}));
       this.state$ = this.store.select( store => store );
       this.posts$ = this.store.select( store => store.posts );
-      this.docs$ = this.store.select( store => store.posts.list[0].details.docs );
+      //this.docs$ = this.store.select( store => store.posts.list[0].details.docs );
+
+      this.docs$ = this.store.select( store => store.posts.get.data );
+      this.totalRows$ = this.store.select( store => store.posts.get.pagination.totalRows );
+      this.pageSize$ = this.store.select( store => store.posts.get.pagination.pageSize );
+      this.pageTotal$ = this.store.select( store => store.posts.get.pagination.pageTotal );
+      this.pageNumber$ = this.store.select( store => store.posts.get.pagination.pageNumber );
+
+      this.pagination$ = this.store.select( store => store.posts.get.pagination );
     }
+
+    onClickBtnPagination(pageNumber: number): void {
+
+      this.onClickBtnGetPosts(pageNumber);
+    }
+
 }

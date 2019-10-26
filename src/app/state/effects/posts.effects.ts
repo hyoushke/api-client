@@ -32,11 +32,11 @@ export class PostsEffects {
     ofType<GetPostsAction>(PostsActionTypes.GET_POSTS),
     mergeMap(
       (action) => this.postsService.getPosts(action.payload.pageLimit,
-                                             action.payload.pageStart,
                                              action.payload.pageNumber,
+                                             action.payload.searchField,
                                              action.payload.searchKeyword)
       .pipe(
-        map( data => new GetPostsSuccessAction([data]) ),
+        map( res => new GetPostsSuccessAction(res) ),
         catchError(error => of(new GetPostsFailedAction(error)) )
       )
     )

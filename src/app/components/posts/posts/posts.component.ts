@@ -75,6 +75,7 @@ export class PostsComponent implements OnInit {
     onClickBtnDeletePosts(post: any): void {
         //alert(post.id);
         this.store.dispatch(new DeletePostsAction({postId: post.id}));
+        this.onClickBtnGetPosts(0);
     }
 
     onClickBtnEditPosts(post: any): void {

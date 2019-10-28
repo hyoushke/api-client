@@ -37,6 +37,8 @@
                 <div class="form-group mb-2">
                     <label for="inputState">Result</label>
                     <select (change)="onChange($event)"  class="form-control">
+                        <option>2</option>
+                        <option>3</option>
                       <option>5</option>
                       <option>10</option>
                       <option>15</option>
@@ -76,9 +78,9 @@
                 <td>{{ post.author }}</td>
                 <td> <a href="#" class="badge badge-success">{{ post.status }}</a> </td>
                 <td> <img class="rounded" [src]="post.imageurl" style="height: 120px;"> </td>
-                <td><button class="btn btn-primary" (click)="onClickBtnGetPosts()">Edit</button></td>
-                <td><button class="btn btn-primary" (click)="onClickBtnGetPosts()">Delete</button></td>
-                <td><button class="btn btn-primary" (click)="onClickBtnGetPosts()">Details</button></td>
+                <td><button class="btn btn-primary" (click)="onClickBtnEditPosts(post)">Edit</button></td>
+                <td><button class="btn btn-primary" (click)="onClickBtnDeletePosts(post)">Delete</button></td>
+                <td><button class="btn btn-primary" (click)="onClickBtnDetailsPosts(post)">Details</button></td>
               </tr>
             </tbody>
           </table>

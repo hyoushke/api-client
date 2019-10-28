@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { AppState } from 'src/app/state/app.state';
 import { IPosts } from 'src/app/models/posts.model';
 import { PostsService } from 'src/app/services/posts/posts.service';
-import { GetPostsAction } from 'src/app/state/actions/posts.actions';
+import { GetPostsAction, DeletePostsAction } from 'src/app/state/actions/posts.actions';
 
 @Component({
   selector: 'app-posts',
@@ -29,7 +29,7 @@ export class PostsComponent implements OnInit {
     public pagination$: Observable<any>;
     public pages: any;
 
-    public pageSize = 10;
+    public pageSize = 2;
 
     constructor(private store: Store<AppState>) {
 
@@ -68,5 +68,22 @@ export class PostsComponent implements OnInit {
 
       this.onClickBtnGetPosts(pageNumber);
     }
+
+
+
+
+    onClickBtnDeletePosts(post: any): void {
+        //alert(post.id);
+        this.store.dispatch(new DeletePostsAction({postId: post.id}));
+    }
+
+    onClickBtnEditPosts(post: any): void {
+      alert(post.id);
+    }
+
+    onClickBtnDetailsPosts(post: any): void {
+      alert(post.id);
+    }
+
 
 }

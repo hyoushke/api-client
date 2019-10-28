@@ -71,11 +71,15 @@ export class EditPostsFailedAction implements Action {
 //delete
 export class DeletePostsAction implements Action {
   readonly type = PostsActionTypes.DELETE_POSTS;
+  constructor(public payload: any) {
+    console.log('DeletePostsAction GOT ');
+    console.log(payload);
+  }
 }
 
 export class DeletePostsSuccessAction implements Action {
   readonly type = PostsActionTypes.DELETE_POSTS_SUCCESS;
-  constructor(public payload: Array<IPosts>) {
+  constructor(public payload: any) {
 
   }
 }

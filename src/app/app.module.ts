@@ -6,12 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { QuestionsComponent } from './components/questions/questions/questions.component';
+
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { QuestionsEffects } from './state/effects/questions.effects';
-import { questionReducer } from './state/reducers/questions.reducer';
 import { PostsComponent } from './components/posts/posts/posts.component';
 import { postsReducer } from './state/reducers/posts.reducer';
 import { PostsEffects } from './state/effects/posts.effects';
@@ -27,7 +28,6 @@ import { navigationsReducer } from './state/reducers/navigations.reducer';
 @NgModule({
   declarations: [
     AppComponent,
-    QuestionsComponent,
     PostsComponent,
     PostsFormComponent,
     PostsNavigationComponent,
@@ -42,6 +42,9 @@ import { navigationsReducer } from './state/reducers/navigations.reducer';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
     StoreModule.forRoot({
       navigations: navigationsReducer,
       posts: postsReducer,

@@ -4,6 +4,7 @@ import { IQuestion } from 'src/app/models/question.model';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { ɵangular_packages_platform_browser_dynamic_platform_browser_dynamic_a } from '@angular/platform-browser-dynamic';
 
 
 const httpOptions = {
@@ -68,17 +69,17 @@ export class PostsService {
     return this.http.patch<any>(url, posts,  {headers: new HttpHeaders({'Content-Type':  'application/json'})});
   }
 
-  /*
-  deletePosts(posts: any): Observable<any> {
-    console.log('start service');
+
+  deletePosts(postId: string): Observable<any> {
+    console.log('deletePosts Service');
 
 
-    const url = this.url + '/posts/';
+    const url = this.url + '/posts/' + postId;
     console.log(url);
-    console.log(posts);
-    return this.http.delete<any>(url, '1');
+    console.log(postId);
+    return this.http.delete<any>(url);
   }
-  */
+
 
 
 

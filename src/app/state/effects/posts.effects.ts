@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { PostsService } from 'src/app/services/posts/posts.service';
 import { PostsActionTypes, PostsActions,
          GetPostsAction, GetPostsSuccessAction, GetPostsFailedAction,
-         AddPostsAction, AddPostsSuccessAction, AddPostsFailedAction
+         AddPostsAction, AddPostsSuccessAction, AddPostsFailedAction, DeletePostsSuccessAction, DeletePostsFailedAction, DeletePostsAction
          } from 'src/app/state/actions/posts.actions';
 
 
@@ -51,6 +51,18 @@ export class PostsEffects {
       .pipe(
         map( data => new AddPostsSuccessAction([data]) ),
         catchError(error => of(new AddPostsFailedAction(error)) )
+      )
+    )
+  );
+
+  @Effect() deletePosts$ = this.actions$
+  .pipe(
+    ofType<DeletePostsAction>(PostsActionTypes.DELETE_POSTS),
+    mergeMap(
+      (action) => this.postsService.deletePosts(action.payload.postId)
+      .pipe(
+        map( data => new DeletePostsSuccessAction([data]) ),
+        catchError(error => of(new DeletePostsFailedAction(error)) )
       )
     )
   );

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { AppState } from 'src/app/state/app.state';
 import { IPosts } from 'src/app/models/posts.model';
 import { PostsService } from 'src/app/services/posts/posts.service';
-import { GetPostsAction, DeletePostsAction } from 'src/app/state/actions/posts.actions';
+import { GetPostsAction, DeletePostsAction, SelectPostsAction } from 'src/app/state/actions/posts.actions';
 
 @Component({
   selector: 'app-posts',
@@ -83,7 +83,8 @@ export class PostsComponent implements OnInit {
     }
 
     onClickBtnDetailsPosts(post: any): void {
-      alert(post.id);
+      //alert(post.id);
+      this.store.dispatch(new SelectPostsAction(post));
     }
 
 

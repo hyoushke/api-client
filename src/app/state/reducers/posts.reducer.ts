@@ -10,7 +10,22 @@ export interface PostsState {
   added: any;
   deleted: any;
   updated: any;
-  selected: any;
+  selected: {
+
+    author: string;
+    title: string;
+    content: string;
+    categories: string;
+    tags: string;
+    likes: string;
+    subscribers: string;
+    shares: string;
+    views: string;
+    imageurl: string;
+    datecreated: string;
+    datemodified: string;
+
+  };
 
   loading: boolean;
   error: Error;
@@ -22,7 +37,20 @@ const initialState: PostsState = {
   added: undefined,
   deleted: undefined,
   updated: undefined,
-  selected: undefined,
+  selected: {
+              author: '',
+              title: '',
+              content: '',
+              categories: '',
+              tags: '',
+              likes: '',
+              subscribers: '',
+              shares: '',
+              views: '',
+              imageurl: '',
+              datecreated: '',
+              datemodified: ''
+  },
   loading: false,
   error: undefined
 };
@@ -39,6 +67,10 @@ export function postsReducer(state: PostsState = initialState, action: PostsActi
 
       case PostsActionTypes.EDIT_POSTS_SUCCESS:
         return {...state, updated: action.payload, loading: false };
+
+        case PostsActionTypes.SELECT_POSTS:
+          return {...state, selected: action.payload, loading: false };
+
 
       case PostsActionTypes.GET_POSTS_SUCCESS:
         const details = action.payload.details;

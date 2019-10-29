@@ -8,6 +8,7 @@ import { AppState } from 'src/app/state/app.state';
 import { IPosts } from 'src/app/models/posts.model';
 import { PostsService } from 'src/app/services/posts/posts.service';
 import { GetPostsAction, AddPostsAction } from 'src/app/state/actions/posts.actions';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-posts-form',
@@ -17,7 +18,7 @@ import { GetPostsAction, AddPostsAction } from 'src/app/state/actions/posts.acti
 export class PostsFormComponent implements OnInit {
 
   public author: string = '';
-  public title: string = '';
+  public title: string;
   public content: string = '';
   public categories: string = '';
   public tags: string = '';
@@ -31,6 +32,7 @@ export class PostsFormComponent implements OnInit {
 
   public posts$: Observable<any>;
   public state$: Observable<any>;
+  public selected$: Observable<any>;
 
   constructor(
               private store: Store<AppState>
@@ -41,6 +43,10 @@ export class PostsFormComponent implements OnInit {
   ngOnInit() {
 
     this.state$ = this.store.select( store => store );
+    this.selected$ = this.store.select( store => store.posts.selected );
+
+
+
 
   }
 

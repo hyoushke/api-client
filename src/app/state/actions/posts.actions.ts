@@ -21,6 +21,8 @@ export enum PostsActionTypes {
   GET_POSTS = '[POSTS] Get Questions',
   GET_POSTS_SUCCESS = '[POSTS] Get Posts Success',
   GET_POSTS_FAILED = '[POSTS] Get Posts Failed',
+
+  SELECT_POSTS = '[POSTS] Select Posts',
 }
 
 //add
@@ -113,10 +115,18 @@ export class GetPostsFailedAction implements Action {
   }
 }
 
+//select
+export class SelectPostsAction implements Action {
+  readonly type = PostsActionTypes.SELECT_POSTS;
+  constructor(public payload: any) {
+
+  }
+}
+
 
 
 export type PostsActions =
 AddPostsAction | AddPostsSuccessAction | AddPostsFailedAction |
 EditPostsAction | EditPostsSuccessAction | EditPostsFailedAction |
 DeletePostsAction | DeletePostsSuccessAction | DeletePostsFailedAction |
-GetPostsAction | GetPostsSuccessAction | GetPostsFailedAction;
+GetPostsAction | GetPostsSuccessAction | GetPostsFailedAction | SelectPostsAction;

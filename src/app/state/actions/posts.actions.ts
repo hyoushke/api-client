@@ -54,11 +54,14 @@ export class AddPostsFailedAction implements Action {
 
 export class EditPostsAction implements Action {
   readonly type = PostsActionTypes.EDIT_POSTS;
+  constructor(public payload: any) {
+
+  }
 }
 
 export class EditPostsSuccessAction implements Action {
   readonly type = PostsActionTypes.EDIT_POSTS_SUCCESS;
-  constructor(public payload: Array<IPosts>) {
+  constructor(public payload: any) {
 
   }
 }

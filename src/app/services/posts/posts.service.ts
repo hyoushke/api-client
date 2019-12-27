@@ -63,7 +63,7 @@ export class PostsService {
     console.log('start service');
 
 
-    const url = this.url + '/posts/';
+    const url = this.url + '/posts/' + posts.id;
     console.log(url);
     console.log(posts);
     return this.http.patch<any>(url, posts,  {headers: new HttpHeaders({'Content-Type':  'application/json'})});

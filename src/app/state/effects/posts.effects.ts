@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { PostsService } from 'src/app/services/posts/posts.service';
 import { PostsActionTypes, PostsActions,
          GetPostsAction, GetPostsSuccessAction, GetPostsFailedAction,
-         AddPostsAction, AddPostsSuccessAction, AddPostsFailedAction, DeletePostsSuccessAction, DeletePostsFailedAction, DeletePostsAction
+         AddPostsAction, AddPostsSuccessAction, AddPostsFailedAction, DeletePostsSuccessAction, DeletePostsFailedAction, DeletePostsAction, EditPostsAction, EditPostsSuccessAction, EditPostsFailedAction
          } from 'src/app/state/actions/posts.actions';
 
 
@@ -54,6 +54,20 @@ export class PostsEffects {
       )
     )
   );
+
+
+  @Effect() editPosts$ = this.actions$
+  .pipe(
+    ofType<EditPostsAction>(PostsActionTypes.EDIT_POSTS),
+    mergeMap(
+      (action) => this.postsService.updatePosts(action.payload.posts)
+      .pipe(
+        map( data => new EditPostsSuccessAction([data]) ),
+        catchError(error => of(new EditPostsFailedAction(error)) )
+      )
+    )
+  );
+
 
   @Effect() deletePosts$ = this.actions$
   .pipe(

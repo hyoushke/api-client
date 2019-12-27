@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { AppState } from 'src/app/state/app.state';
 import { IPosts } from 'src/app/models/posts.model';
 import { PostsService } from 'src/app/services/posts/posts.service';
-import { GetPostsAction, AddPostsAction } from 'src/app/state/actions/posts.actions';
+import { GetPostsAction, AddPostsAction, EditPostsAction } from 'src/app/state/actions/posts.actions';
 import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
@@ -35,6 +35,7 @@ export class PostsFormComponent implements OnInit {
   public selected$: Observable<any>;
 
   constructor(
+              private cd: ChangeDetectorRef,
               private store: Store<AppState>
               ) {
 
@@ -44,6 +45,15 @@ export class PostsFormComponent implements OnInit {
 
     this.state$ = this.store.select( store => store );
     this.selected$ = this.store.select( store => store.posts.selected );
+
+
+    this.store.select( store => store.posts.selected ).subscribe(
+      (data) => {
+        this.title = data.title;
+        this.author = data.author;
+      }
+     );
+
 
 
 
@@ -108,5 +118,47 @@ export class PostsFormComponent implements OnInit {
     //this.posts$ = this.store.select( store => store.posts );
 
 }
+
+
+
+
+onClickBtnUpdatePost(): void {
+
+      this.cd.detectChanges();
+
+      const post = {
+        id: '1',
+        status: 'Active',
+        authorid: '1',
+        author: this.author,
+        title: this.title,
+        content: this.content,
+        categories: this.categories,
+        tags: this.tags,
+        likes: this.likes,
+        subscribers: this.subscribers,
+        shares: this.shares,
+        views: this.views,
+        imageurl: this.imageurl,
+        datecreated: this.datecreated,
+        datemodified: this.datemodified
+};
+
+        this.store.dispatch(new EditPostsAction({posts: post}));
+      this.state$ = this.store.select( store => store );
+      this.posts$ = this.store.select( store => store.posts );
+
+
+
+  }
+
+
+
+  onChangeTxtAuthor(event): void {
+
+    console.log(event.target.value);
+    alert(event.target.value);
+
+  }
 
 }

@@ -31,9 +31,18 @@ export interface PostsState {
   error: Error;
 }
 
+const getInitial = {
+  data: [],
+  searchText: '',
+  pagination : { totalRows: 0,
+                 pageNumber: 0,
+                 pageSize: 0,
+                 pageTotal: 0
+                 }
+                }
 
 const initialState: PostsState = {
-  get: undefined,
+  get: getInitial,
   added: undefined,
   deleted: undefined,
   updated: undefined,

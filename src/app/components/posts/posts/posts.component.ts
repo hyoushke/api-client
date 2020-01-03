@@ -32,11 +32,11 @@ export class PostsComponent implements OnInit {
     public pageSize = 2;
 
     constructor(private store: Store<AppState>) {
-
+      
     }
 
     ngOnInit() {
-
+      this.onClickBtnGetPosts(0);
       this.state$ = this.store.select( store => store );
       this.posts$ = this.store.select( store => store.posts );
     }
@@ -50,6 +50,7 @@ export class PostsComponent implements OnInit {
     onClickBtnGetPosts(pageNumber: number): void {
       pageNumber = pageNumber + 1;
 
+      console.log('dispatch');
       this.store.dispatch(new GetPostsAction({pageLimit: this.pageSize, pageNumber: pageNumber, searchField: '1', searchKeyword: '1'}));
       this.state$ = this.store.select( store => store );
       this.posts$ = this.store.select( store => store.posts );
@@ -60,6 +61,7 @@ export class PostsComponent implements OnInit {
       this.pageSize$ = this.store.select( store => store.posts.get.pagination.pageSize );
       this.pageTotal$ = this.store.select( store => store.posts.get.pagination.pageTotal );
       this.pageNumber$ = this.store.select( store => store.posts.get.pagination.pageNumber );
+      console.log('page number');
 
       this.pagination$ = this.store.select( store => store.posts.get.pagination );
     }

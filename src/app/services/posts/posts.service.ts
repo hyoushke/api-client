@@ -41,8 +41,7 @@ export class PostsService {
   getPosts(pageLimit: number, pageNumber: number, searchField: string, searchKeyword: string): Observable<any> {
 
     console.log('start service');
-
-
+    console.log('GET POSTS Service')
     const url = this.url + '/posts/' + pageLimit + '/' + pageNumber + '/' + searchField + '/' + searchKeyword;
     console.log(url);
     return this.http.get<any>(url, this.options);

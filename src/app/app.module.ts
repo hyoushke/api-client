@@ -20,13 +20,15 @@ import { PostsEffects } from 'src/app/state/effects/posts.effects';
 import { usersReducer } from './state/reducers/users.reducer';
 import { navigationsReducer } from './state/reducers/navigations.reducer';
 import { postsReducer } from './state/reducers/posts.reducer';
+import { PostsEditComponent } from './components/posts/posts-edit/posts-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    PostsEditComponent
   ],
   imports: [
     HttpClientModule,
